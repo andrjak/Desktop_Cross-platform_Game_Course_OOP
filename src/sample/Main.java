@@ -16,9 +16,9 @@ import java.awt.*;
 
 public class Main extends Application {
     //Игровые переменные для настройки всего приложения
-    private Player player = new Player(new ImageView(new Image(getClass().getResourceAsStream("1.png"))));
-    static Pane root = new Pane();  // Основной экран
-    private Map map = new Map(root, player);
+    private Player player = new Player(new ImageView(new Image(getClass().getResourceAsStream("1.png"))),root);
+    private static Pane root = new Pane();  // Основной экран
+    private MapControler map = new MapControler(root, player);
     private Controller controller = new Controller(player,root); // Контролер для управления играком MVC паттерн
 
     @Override
@@ -28,7 +28,7 @@ public class Main extends Application {
         root.getChildren().addAll(player); // Так как Player наследуется от Pane
         Scene scene = new Scene(root);
 
-        scene.setOnKeyPressed(event->controller.keys.put(event.getCode(),true));
+        scene.setOnKeyPressed(event->controller.keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event->controller.keys.put(event.getCode(), false));
 
         AnimationTimer timer = new AnimationTimer() {

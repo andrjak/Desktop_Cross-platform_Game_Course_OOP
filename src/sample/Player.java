@@ -3,6 +3,7 @@ package sample;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 public class Player extends AbstractEssence
@@ -10,11 +11,13 @@ public class Player extends AbstractEssence
     private int experience = 0;  // Опыт игрока при достижении отметки повышает уровень
     private int experienceMax = 250; // Количество опыта который нобходимо получить для повышения уровня (на каждом уровне увеличивается в 2 раза)
     private int score = 0;  // Количество золота
-    public Player(ImageView image)
+    private Pane root;
+    public Player(ImageView image, Pane root)
     {
         super(image);
         this.setTranslateX(250);
         this.setTranslateY(250);
+        this.root = root;
 
         this.image.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
         animation = new SpriteAnimation(image, Duration.millis(200),count,columns,offsetX,offsetY,width,height);
@@ -23,15 +26,15 @@ public class Player extends AbstractEssence
 
     public void isGoldEat(){   // Метод позволяющий собирать Золото
         Gold removeGold = null;
-        for (Gold gold: Map.gold) {
+        for (Gold gold: MapControler.gold) {
             if (this.getBoundsInParent().intersects(gold.getBoundsInParent())) {
                 removeGold = gold;
                 score++;
                 System.out.println(score);  // Временный консольный вывод
             }
         }
-        Map.gold.remove(removeGold);
-        Main.root.getChildren().remove(removeGold);
+        MapControler.gold.remove(removeGold);
+        root.getChildren().remove(removeGold);
     }
 
     @Override
@@ -48,8 +51,8 @@ public class Player extends AbstractEssence
     public void attack(double x, double y)
     {
         Bullet bullet = new Bullet(new ImageView(
-                new Image(getClass().getResourceAsStream("bullet.png"))),this,x,y);
-        Main.root.getChildren().addAll(bullet);
+                new Image(getClass().getResourceAsStream("bullet.png"))),this, this.root, x, y);
+        root.getChildren().addAll(bullet);
         attack(bullet);
     }
 

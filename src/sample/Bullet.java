@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class Bullet extends AbstractItem {
 
@@ -8,11 +9,13 @@ public class Bullet extends AbstractItem {
     private Player player;
     private double X;
     private double Y;
+    private Pane root;
 
-    public Bullet(ImageView image, Player player, double X, double Y)
+    public Bullet(ImageView image, Player player, Pane root, double X, double Y)
     {
         super(image);
         this.player = player;
+        this.root = root;
         this.setTranslateX(player.getTranslateX());
         this.setTranslateY(player.getTranslateY());
         this.X = X;
@@ -34,16 +37,16 @@ public class Bullet extends AbstractItem {
             counter--;
         }
         if (this.getTranslateX() >= X && this.getTranslateY() >= Y) {
-            Main.root.getChildren().remove(this);
-            Map.bullets.remove(this);
+            root.getChildren().remove(this);
+            MapControler.bullets.remove(this);
         }
     }
 
-    public void damage()  // Покачто уничтожает одним выстрелом
+    private void damage()  // Покачто уничтожает одним выстрелом
     {
         Enemy removeEnemy = null;
         boolean flag = true;
-        for (Enemy enemy : Map.enemies) {
+        for (Enemy enemy : MapControler.enemies) {
             if (this.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
                 removeEnemy = enemy;
                 if (removeEnemy.health - damageSize <= 0)
@@ -57,13 +60,10 @@ public class Bullet extends AbstractItem {
         }
         if (flag)
         {
-            Map.enemies.remove(removeEnemy);
-            Main.root.getChildren().remove(removeEnemy);
-        }
-        if (removeEnemy != null)
-        {
-            Map.bullets.remove(this);
-            Main.root.getChildren().remove(this);
+            MapControler.enemies.remove(removeEnemy);
+            root.getChildren().remove(removeEnemy);
+            root.getChildren().remove(this);
+            MapControler.bullets.remove(this);
         }
     }
 }

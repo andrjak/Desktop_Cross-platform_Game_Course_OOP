@@ -9,14 +9,14 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
-public class Map {    // Отвечает за события которые происходят на карте (появление золота, врагов и т.д.)
+public class MapControler {    // Отвечает за события которые происходят на карте (появление золота, врагов и т.д.)
     public static ArrayList<Gold> gold = new ArrayList<>();
     public static ArrayList<Enemy> enemies = new ArrayList<>();
     public static ArrayList<Bullet> bullets = new ArrayList<>();
     private Pane root;
     private Player player;
 
-    public Map(Pane root, Player player)
+    public MapControler(Pane root, Player player)
     {
         this.root = root;
         this.player = player;
@@ -62,7 +62,7 @@ public class Map {    // Отвечает за события которые п�
             goldItem.setTranslateX(x);
             goldItem.setTranslateY(y);
             gold.add(goldItem);
-            Main.root.getChildren().addAll(goldItem);
+            root.getChildren().addAll(goldItem);
         }
     }
 

@@ -23,29 +23,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        root.setPrefSize(500, 500);
-        //root.getChildren().addAll(new ImageView(new Image(getClass().getResourceAsStream("backGround.png")))); // временный фон
-        root.getChildren().addAll(player); // Так как Player наследуется от Pane
-        Scene scene = new Scene(root);
-
-        scene.setOnKeyPressed(event->controller.keys.put(event.getCode(), true));
-        scene.setOnKeyReleased(event->controller.keys.put(event.getCode(), false));
-
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {            // Вызывается в каждом кадре анимации
-                controller.update();
-                map.GoldGenerator((int)primaryStage.getWidth(),(int)primaryStage.getHeight());
-                map.EnemyGenerator((int)primaryStage.getWidth(),(int)primaryStage.getHeight());
-                //map.BulletFlight();
-            }
-        };
-        timer.start();
-
-        primaryStage.setFullScreen(true);
-        primaryStage.setTitle("MyGame");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        View view = new View(primaryStage, root, map, controller, player);
     }
 
 

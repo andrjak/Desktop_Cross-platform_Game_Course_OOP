@@ -1,4 +1,4 @@
-package sample;
+package game;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;

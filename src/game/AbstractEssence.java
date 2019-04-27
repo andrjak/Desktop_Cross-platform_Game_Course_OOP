@@ -1,11 +1,7 @@
-package sample;
+package game;
 
-import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
-import sample.SpriteAnimation;
 import javafx.geometry.Point2D;
 
 public abstract class AbstractEssence extends Pane {

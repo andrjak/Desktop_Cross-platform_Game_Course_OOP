@@ -1,4 +1,4 @@
-package sample;
+package game;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;

@@ -1,7 +1,8 @@
-package game;
+package model;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import view.View;
 
 public class Main extends Application {
 

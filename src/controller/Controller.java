@@ -1,7 +1,9 @@
-package game;
+package controller;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import model.Player;
+
 import java.util.HashMap;
 
 public class Controller {
@@ -9,7 +11,7 @@ public class Controller {
     private Player player;
     private Pane root;
 
-    Controller(Player player, Pane root)
+    public Controller(Player player, Pane root)
     {
         this.player = player;
         this.root = root;

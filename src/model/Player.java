@@ -1,5 +1,6 @@
-package game;
+package model;
 
+import controller.MapControler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

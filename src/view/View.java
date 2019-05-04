@@ -1,4 +1,4 @@
-package game;
+package view;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
@@ -6,6 +6,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import controller.Controller;
+import controller.MapControler;
+import model.Player;
 
 public class View {
 

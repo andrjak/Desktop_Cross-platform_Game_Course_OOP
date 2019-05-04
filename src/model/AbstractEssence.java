@@ -1,4 +1,4 @@
-package game;
+package model;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -12,7 +12,7 @@ public abstract class AbstractEssence extends Pane {
     protected int offsetY = 0;     // -//-
     protected int width = 36;      // Размеры вырезаемого прямо угольника
     protected int height = 36;     // -//-
-    protected SpriteAnimation animation;  // Хранит анимацию для сущности
+    public SpriteAnimation animation;  // Хранит анимацию для сущности
     protected int health = 100;    // Уровень здоровья
     protected int level  = 1;      // Уровень сущности
     protected int damage = 10;     // Урон сущности (player будет изменять эту переменную в зависимости от оружия)

@@ -1,5 +1,6 @@
-package game;
+package model;
 
+import controller.MapControler;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 

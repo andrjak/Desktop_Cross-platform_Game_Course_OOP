@@ -68,10 +68,10 @@ public class MapControler {    // Отвечает за события кото�
 
     public void BulletFlight()
     {
-        for (Bullet bullet: bullets)
-        {
-            bullet.flight();
-        }
+        //for (Bullet bullet: bullets)
+        //{
+            //bullet.flight();
+        //}
     }
 
 }

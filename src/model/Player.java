@@ -19,7 +19,6 @@ public class Player extends AbstractEssence
         this.setTranslateX(250);
         this.setTranslateY(250);
         this.root = root;
-
         this.image.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
         animation = new SpriteAnimation(image, Duration.millis(200),count,columns,offsetX,offsetY,width,height);
         getChildren().addAll(image); // Так как наследуется от Pane передаём картинку
@@ -51,16 +50,15 @@ public class Player extends AbstractEssence
 
     public void attack(double x, double y)
     {
-        Bullet bullet = new Bullet(new ImageView(
-                new Image(getClass().getResourceAsStream("bullet.png"))),this, this.root, x, y);
+        Bullet bullet = new Bullet(this, this.root, x, y);
         root.getChildren().addAll(bullet);
-        attack(bullet);
+        //attack(bullet);
     }
 
-    private void attack(Bullet bullet)
-    {
-        new newThread("BigBum").run(bullet);
-    }
+    //private void attack(Bullet bullet)
+    //{
+        //new newThread("BigBum").run(bullet);
+    //}
 
     public void setExperience(int experience)
     {
@@ -73,13 +71,13 @@ public class Player extends AbstractEssence
         }
     }
 
-    private class newThread extends Thread {
-
-        newThread(String name){
-            super(name);
-        }
-        public void run(Bullet bullet){
-                bullet.flight();
-        }
-    }
+//    private class newThread extends Thread {
+//
+//        newThread(String name){
+//            super(name);
+//        }
+//        public void run(Bullet bullet){
+//                bullet.flight();
+//        }
+//    }
 }

@@ -1,8 +1,7 @@
 package model;
 
-import controller.MapControler;
+import controller.MapController;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -10,7 +9,7 @@ import javafx.util.Duration;
 public class Player extends AbstractEssence
 {
     private int experience = 0;  // Опыт игрока при достижении отметки повышает уровень
-    private int experienceMax = 250; // Количество опыта который нобходимо получить для повышения уровня (на каждом уровне увеличивается в 2 раза)
+    private int experienceMax = 100; // Количество опыта который нобходимо получить для повышения уровня (на каждом уровне увеличивается в 2 раза)
     private int score = 0;  // Количество золота
     private Pane root;
     public Player(ImageView image, Pane root)
@@ -19,6 +18,7 @@ public class Player extends AbstractEssence
         this.setTranslateX(250);
         this.setTranslateY(250);
         this.root = root;
+        this.setHealth(100);
         this.image.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
         animation = new SpriteAnimation(image, Duration.millis(200),count,columns,offsetX,offsetY,width,height);
         getChildren().addAll(image); // Так как наследуется от Pane передаём картинку
@@ -26,14 +26,14 @@ public class Player extends AbstractEssence
 
     public void isGoldEat(){   // Метод позволяющий собирать Золото
         Gold removeGold = null;
-        for (Gold gold: MapControler.gold) {
+        for (Gold gold: MapController.gold) {
             if (this.getBoundsInParent().intersects(gold.getBoundsInParent())) {
                 removeGold = gold;
                 score++;
                 System.out.println(score);  // Временный консольный вывод
             }
         }
-        MapControler.gold.remove(removeGold);
+        MapController.gold.remove(removeGold);
         root.getChildren().remove(removeGold);
     }
 
@@ -51,14 +51,7 @@ public class Player extends AbstractEssence
     public void attack(double x, double y)
     {
         Bullet bullet = new Bullet(this, this.root, x, y);
-        root.getChildren().addAll(bullet);
-        //attack(bullet);
     }
-
-    //private void attack(Bullet bullet)
-    //{
-        //new newThread("BigBum").run(bullet);
-    //}
 
     public void setExperience(int experience)
     {
@@ -71,13 +64,4 @@ public class Player extends AbstractEssence
         }
     }
 
-//    private class newThread extends Thread {
-//
-//        newThread(String name){
-//            super(name);
-//        }
-//        public void run(Bullet bullet){
-//                bullet.flight();
-//        }
-//    }
 }

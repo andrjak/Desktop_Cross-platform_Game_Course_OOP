@@ -10,7 +10,7 @@ public class Zombie extends Enemy
     {
         super(image);
         damage = 10;
-        health = 200;
+        setHealth(200);
 
         count = 4;       // Количество строк в картинке
         columns = 3;     // Количество столбцов в картинке

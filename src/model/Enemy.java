@@ -14,6 +14,11 @@ public class Enemy extends AbstractEssence {
         super(image);
     }
 
+    public void getDamage(int damage) // Полученный урон
+    {
+        this.setHealth(this.getHealth() - damage);
+    }
+
     public void attack()
     {
 

@@ -9,14 +9,13 @@ import model.*;
 
 import java.util.ArrayList;
 
-public class MapControler {    // Отвечает за события которые происходят на карте (появление золота, врагов и т.д.)
+public class MapController {    // Отвечает за события которые происходят на карте (появление золота, врагов и т.д.)
     public static ArrayList<Gold> gold = new ArrayList<>();
     public static ArrayList<Enemy> enemies = new ArrayList<>();
-    public static ArrayList<Bullet> bullets = new ArrayList<>();
     private Pane root;
     private Player player;
 
-    public MapControler(Pane root, Player player)
+    public MapController(Pane root, Player player)
     {
         this.root = root;
         this.player = player;
@@ -65,13 +64,4 @@ public class MapControler {    // Отвечает за события кото�
             root.getChildren().addAll(goldItem);
         }
     }
-
-    public void BulletFlight()
-    {
-        //for (Bullet bullet: bullets)
-        //{
-            //bullet.flight();
-        //}
-    }
-
 }

@@ -10,8 +10,7 @@ public class Skillet extends Enemy
     {
         super(image);
         damage = 25;
-        health = 100;
-
+        setHealth(100);
         count = 4;       // Количество строк в картинке
         columns = 3;     // Количество столбцов в картинке
         offsetX = 0;     // Смещение

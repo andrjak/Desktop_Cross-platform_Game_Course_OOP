@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import controller.Controller;
-import controller.MapControler;
+import controller.MapController;
 import model.Player;
 
 public class View {
@@ -16,7 +16,7 @@ public class View {
     //Игровые переменные для настройки всего приложения
     private Stage primaryStage;
     private Pane root;
-    private MapControler map;
+    private MapController map;
     private Controller controller;
     private Player player;
 
@@ -25,7 +25,7 @@ public class View {
     {
         root = new Pane();  // Основной экран
         Player player = new Player(new ImageView(new Image(View.class.getResourceAsStream("1.png"))),root);
-        MapControler map = new MapControler(root, player);
+        MapController map = new MapController(root, player);
         Controller controller = new Controller(player,root); // Контролер для управления играком MVC паттерн
 
         root.setPrefSize(500, 500);
@@ -47,7 +47,7 @@ public class View {
         };
         timer.start();
 
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.setTitle("MyGame");
         primaryStage.setScene(scene);
         primaryStage.show();

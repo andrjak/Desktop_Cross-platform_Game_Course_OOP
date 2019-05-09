@@ -10,17 +10,16 @@ public abstract class AbstractEssence extends Pane {
     protected int columns = 3;     // Количество столбцов в картинке
     protected int offsetX = 0;     // Смещение
     protected int offsetY = 0;     // -//-
-    protected int width = 36;      // Размеры вырезаемого прямо угольника
-    protected int height = 36;     // -//-
+    int width = 36;      // Размеры вырезаемого прямо угольника
+    int height = 36;     // -//-
     public SpriteAnimation animation;  // Хранит анимацию для сущности
-    private int health;    // Уровень здоровья
+    private int health;            // Уровень здоровья
     protected int level  = 1;      // Уровень сущности
     protected int damage = 10;     // Урон сущности (player будет изменять эту переменную в зависимости от оружия)
-    protected int resistance = 0;
-    private boolean canJump;       // Возможен ли прыжок
+    protected int resistance = 0;  // Сопротивление урону
     public Point2D essenceVelocity;
 
-    public AbstractEssence(ImageView image)                                               //Стандартный конструктор
+    AbstractEssence(ImageView image)                                               //Стандартный конструктор
     {
         this.image = image;
     }
@@ -51,13 +50,24 @@ public abstract class AbstractEssence extends Pane {
         }
     }
 
-    public void setHealth(int newHealth)
+    void setHealth(int newHealth)
     {
         this.health = newHealth;
     }
 
-    public int getHealth()
+    int getHealth()
     {
         return this.health;
     }
+
+    int getEssenseWidth()
+    {
+        return width;
+    }
+
+    int getEssenseHeight()
+    {
+        return height;
+    }
+
 }

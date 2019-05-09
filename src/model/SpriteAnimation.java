@@ -17,8 +17,8 @@ public class SpriteAnimation extends Transition {
     private int height;   // -//-
 
     // Конструктор устанавливает переменные и продолжительность анимации
-    public SpriteAnimation(ImageView image, Duration duration, int count, int columns, int offsetX,
-                           int offsetY, int width, int height) {
+    SpriteAnimation(ImageView image, Duration duration, int count, int columns, int offsetX,
+                    int offsetY, int width, int height) {
         this.image = image;
         this.count = count;
         this.columns = columns;

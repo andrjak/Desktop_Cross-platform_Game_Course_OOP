@@ -20,13 +20,13 @@ public class Bullet extends Circle {
     private Timeline timeline;
     AnimationTimer timer;
 
-    public Bullet(Player player, Pane root, double X, double Y)
+    public Bullet(Pane root, double X, double Y)
     {
         super(5, Paint.valueOf("black"));       // Внешние параметры пули
-        this.player = player;
+        this.player = Player.Init();
         this.root = root;
-        this.setCenterX(player.getTranslateX());
-        this.setCenterY(player.getTranslateY());
+        this.setCenterX(player.getTranslateX() + player.getHeight() / 2); // Создание снаряда в центре игрока
+        this.setCenterY(player.getTranslateY() + player.getWidth() / 2); // Создание снаряда в центре игрока
         this.X = X;
         this.Y = Y;
         root.getChildren().addAll(this);
@@ -74,8 +74,7 @@ public class Bullet extends Circle {
                 {
                     player.setExperience(enemy.experience);
                     System.out.println("Вы получили опыт : " + enemy.experience);
-                    MapController.enemies.remove(removeEnemy);
-                    root.getChildren().remove(removeEnemy);
+                    removeEnemy.death();
                 }
                 root.getChildren().remove(this);
                 return;

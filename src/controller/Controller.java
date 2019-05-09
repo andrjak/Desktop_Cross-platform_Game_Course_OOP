@@ -42,10 +42,6 @@ public class Controller {
             player.animation.setOffsetY(108);
             player.moveX(-2);
         }
-        else if (isPressed(KeyCode.SPACE )) {
-            System.out.println("Скоро прыжки !");
-            keys.clear();
-        }
         else if (isPressed(KeyCode.TAB))
         {
             System.out.println("Скоро чит режим!");

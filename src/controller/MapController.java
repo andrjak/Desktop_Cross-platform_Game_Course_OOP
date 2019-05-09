@@ -15,10 +15,10 @@ public class MapController {    // Отвечает за события кото
     private Pane root;
     private Player player;
 
-    public MapController(Pane root, Player player)
+    public MapController(Pane root)
     {
         this.root = root;
-        this.player = player;
+        this.player = Player.Init();
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -36,14 +36,14 @@ public class MapController {    // Отвечает за события кото
     int y = (int)Math.floor(Math.random()*lenY);
     if (enemies.size() <= 100) {
         if (random == 10) {
-            Skillet skillet = new Skillet(new ImageView(new Image(getClass().getResourceAsStream("skeleton.png"))));
+            Skillet skillet = new Skillet(new ImageView(new Image(getClass().getResourceAsStream("skeleton.png"))),root);
             skillet.setTranslateX(x);
             skillet.setTranslateY(y);
             enemies.add(skillet);
             root.getChildren().addAll(skillet);
         }
         if (random == 5) {
-            Zombie zombie = new Zombie(new ImageView(new Image(getClass().getResourceAsStream("zombie.png"))));
+            Zombie zombie = new Zombie(new ImageView(new Image(getClass().getResourceAsStream("zombie.png"))),root);
             zombie.setTranslateX(x);
             zombie.setTranslateY(y);
             enemies.add(zombie);

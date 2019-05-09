@@ -12,7 +12,9 @@ public class Player extends AbstractEssence
     private int experienceMax = 100; // Количество опыта который нобходимо получить для повышения уровня (на каждом уровне увеличивается в 2 раза)
     private int score = 0;  // Количество золота
     private Pane root;
-    public Player(ImageView image, Pane root)
+    private static Player player;
+
+    private Player(ImageView image, Pane root) // Сокрытый конструктор (вызывается через инициализатор)
     {
         super(image);
         this.setTranslateX(250);
@@ -24,36 +26,80 @@ public class Player extends AbstractEssence
         getChildren().addAll(image); // Так как наследуется от Pane передаём картинку
     }
 
-    public void isGoldEat(){   // Метод позволяющий собирать Золото
+    public static Player Init(ImageView image, Pane root) // Инициализатор начальный
+    {
+        if (player == null)
+        {
+            player = new Player(image, root);
+            return player;
+        }
+        return player;
+    }
+    public static Player Init() // Для получения уже существующего объекта
+    {
+        if (player != null)
+        {
+            return player;
+        }
+        else return null;
+    }
+
+    void getDamage(int damage) // Полученный урон
+    {
+        this.setHealth(this.getHealth() - damage);
+    }
+
+    private void isGoldEat(){   // Метод позволяющий собирать Золото
         Gold removeGold = null;
         for (Gold gold: MapController.gold) {
             if (this.getBoundsInParent().intersects(gold.getBoundsInParent())) {
                 removeGold = gold;
                 score++;
                 System.out.println(score);  // Временный консольный вывод
+                MapController.gold.remove(removeGold);
+                root.getChildren().remove(removeGold);
+                return;
             }
         }
-        MapController.gold.remove(removeGold);
-        root.getChildren().remove(removeGold);
+    }
+
+    private boolean isEnemyStop() // Останавливатся когда врезался в врага
+    {
+        for (Enemy enemy: MapController.enemies)
+        {
+            if (this.getBoundsInParent().intersects(enemy.getBoundsInParent()))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public void moveX(int x){                                            // Движение по оси X
-        super.moveX(x);
-        isGoldEat();
+        if (isEnemyStop())
+        {
+            super.moveX(x);
+            isGoldEat();
+        }
+        else super.moveX(-x);
     }
     @Override
     public void moveY(int y) {                                           // Движение по оси Y (надо переделать в прыжки)
-        super.moveY(y);
-        isGoldEat();
+        if (isEnemyStop())
+        {
+            super.moveY(y);
+            isGoldEat();
+        }
+        else super.moveY(-y);
     }
 
     public void attack(double x, double y)
     {
-        Bullet bullet = new Bullet(this, this.root, x, y);
+        Bullet bullet = new Bullet(this.root, x, y);
     }
 
-    public void setExperience(int experience)
+    void setExperience(int experience)
     {
         if (experience > 0) {
             this.experience += experience;

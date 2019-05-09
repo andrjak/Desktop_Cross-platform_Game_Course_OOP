@@ -24,8 +24,8 @@ public class View {
     private View(Stage primaryStage)
     {
         root = new Pane();  // Основной экран
-        Player player = new Player(new ImageView(new Image(View.class.getResourceAsStream("1.png"))),root);
-        MapController map = new MapController(root, player);
+        Player player = Player.Init(new ImageView(new Image(View.class.getResourceAsStream("1.png"))),root);
+        MapController map = new MapController(root);
         Controller controller = new Controller(player,root); // Контролер для управления играком MVC паттерн
 
         root.setPrefSize(500, 500);

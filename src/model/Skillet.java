@@ -2,13 +2,14 @@ package model;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 public class Skillet extends Enemy
 {
-    public Skillet(ImageView image)
+    public Skillet(ImageView image, Pane root)
     {
-        super(image);
+        super(image, root);
         damage = 25;
         setHealth(100);
         count = 4;       // Количество строк в картинке

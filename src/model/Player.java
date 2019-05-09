@@ -85,7 +85,7 @@ public class Player extends AbstractEssence
         else super.moveX(-x);
     }
     @Override
-    public void moveY(int y) {                                           // Движение по оси Y (надо переделать в прыжки)
+    public void moveY(int y) {                                           // Движение по оси Y
         if (isEnemyStop())
         {
             super.moveY(y);

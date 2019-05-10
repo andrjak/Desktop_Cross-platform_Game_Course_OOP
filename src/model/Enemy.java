@@ -83,19 +83,19 @@ public class Enemy extends AbstractEssence {
         if (!this.getBoundsInParent().intersects(player.getBoundsInParent())) {
             int flag = (int)Math.floor((Math.random() * 4));
             if (((player.getTranslateY() + player.getWidth() / 2) < (this.getTranslateY() + this.getWidth() / 2) && flag == 0)) {
-                this.animation.play();
+                //this.animation.play();
                 this.animation.setOffsetY(2 * height);
                 this.moveY(-2);
             } else if (((player.getTranslateY() + player.getWidth() / 2) > (this.getTranslateY() + this.getWidth() / 2) && flag == 1)) {
-                this.animation.play();
+                //this.animation.play();
                 this.animation.setOffsetY(0);
                 this.moveY(2);
             } else if (((player.getTranslateX() + player.getHeight() / 2) > (this.getTranslateX() + this.getHeight() / 2) && flag == 2)) {
-                this.animation.play();
+                //this.animation.play();
                 this.animation.setOffsetY(height);
                 this.moveX(2);
             } else if (((player.getTranslateX() + player.getHeight() / 2) < (this.getTranslateX() + this.getHeight() / 2) && flag == 3)) {
-                this.animation.play();
+                //this.animation.play();
                 this.animation.setOffsetY(3 * height);
                 this.moveX(-2);
             }

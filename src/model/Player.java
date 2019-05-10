@@ -63,7 +63,7 @@ public class Player extends AbstractEssence
         }
     }
 
-    private boolean isEnemyStop() // Останавливатся когда врезался в врага
+    private boolean isPlayerStop() // Останавливатся когда врезался в врага
     {
         for (Enemy enemy: MapController.enemies)
         {
@@ -77,7 +77,7 @@ public class Player extends AbstractEssence
 
     @Override
     public void moveX(int x){                                            // Движение по оси X
-        if (isEnemyStop())
+        if (isPlayerStop())
         {
             super.moveX(x);
             isGoldEat();
@@ -86,7 +86,7 @@ public class Player extends AbstractEssence
     }
     @Override
     public void moveY(int y) {                                           // Движение по оси Y
-        if (isEnemyStop())
+        if (isPlayerStop())
         {
             super.moveY(y);
             isGoldEat();

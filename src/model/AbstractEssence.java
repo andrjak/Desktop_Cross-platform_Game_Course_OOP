@@ -70,4 +70,14 @@ public abstract class AbstractEssence extends Pane {
         return height;
     }
 
+    public double getCentralX()
+    {
+        return this.getTranslateX() + this.getWidth() / 2;
+    }
+
+    public double getCentralY()
+    {
+        return this.getTranslateY() + this.getHeight() / 2;
+    }
+
 }

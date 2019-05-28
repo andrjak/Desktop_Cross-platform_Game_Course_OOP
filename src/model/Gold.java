@@ -8,4 +8,5 @@ public class Gold extends AbstractItem {
     {
         super(image);
     }
+
 }

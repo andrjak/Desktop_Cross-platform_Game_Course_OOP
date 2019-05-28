@@ -31,7 +31,7 @@ public class MapController {    // Отвечает за события кото
 
     public void EnemyGenerator(int lenX, int lenY)
     {
-    int random = (int)Math.floor(Math.random()*100);
+    int random = (int)Math.floor(Math.random()*200);
     int x = (int)Math.floor(Math.random()*lenX);
     int y = (int)Math.floor(Math.random()*lenY);
     if (enemies.size() <= 100) {

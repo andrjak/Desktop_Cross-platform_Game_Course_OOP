@@ -20,7 +20,7 @@ public class Bullet extends Circle {
     private Timeline timeline;
     AnimationTimer timer;
 
-    public Bullet(Pane root, double X, double Y)
+    Bullet(Pane root, double X, double Y)
     {
         super(5, Paint.valueOf("black"));       // Внешние параметры пули
         this.player = Player.Init();
@@ -61,7 +61,7 @@ public class Bullet extends Circle {
     }
 
 
-    private void damage()  // Проверка попадания в цель и соответствующее поведение объекта
+    public void damage()  // Проверка попадания в цель и соответствующее поведение объекта
     {
         Enemy removeEnemy = null;
         for (Enemy enemy : MapController.enemies) {

@@ -47,7 +47,7 @@ public class Controller {
             System.out.println("Скоро чит режим!");
             keys.clear();
         }
-        else{                                               // Если кнопки не нажаты останавливаем анимацию
+        else {                                               // Если кнопки не нажаты останавливаем анимацию
             player.animation.stop();
         }
     }

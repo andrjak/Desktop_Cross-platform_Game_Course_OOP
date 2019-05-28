@@ -10,7 +10,8 @@ public class Player extends AbstractEssence
 {
     private int experience = 0;  // Опыт игрока при достижении отметки повышает уровень
     private int experienceMax = 100; // Количество опыта который нобходимо получить для повышения уровня (на каждом уровне увеличивается в 2 раза)
-    private int score = 0;  // Количество золота
+    int score = 0;  // Количество золота
+    private int live = 1;
     private Pane root;
     private static Player player;
 
@@ -74,6 +75,7 @@ public class Player extends AbstractEssence
         }
         return true;
     }
+
 
     @Override
     public void moveX(int x){                                            // Движение по оси X

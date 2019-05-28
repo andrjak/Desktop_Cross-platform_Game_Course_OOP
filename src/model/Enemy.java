@@ -2,10 +2,22 @@ package model;
 
 import controller.MapController;
 import javafx.animation.AnimationTimer;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import view.View;
 
 public class Enemy extends AbstractEssence {
 
@@ -27,13 +39,6 @@ public class Enemy extends AbstractEssence {
         this.root = root;
         player = Player.Init();
 
-        timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {            // Вызывается в каждом кадре анимации
-                enemyGo();
-            }
-        };
-        timer.start();
     }
 
     void getDamage(int damage) // Полученный урон
@@ -55,7 +60,7 @@ public class Enemy extends AbstractEssence {
         if (isEnemyStop())
         {
             super.moveX(x);
-            //attack();
+            attack();
         }
     }
     @Override
@@ -63,22 +68,45 @@ public class Enemy extends AbstractEssence {
         if (isEnemyStop())
         {
             super.moveY(y);
-            //attack();
+            attack();
         }
     }
 
     void attack()
     {
         if (this.getBoundsInParent().intersects(player.getBoundsInParent())) {
-           player.getDamage(damage);
-           if (player.getHealth() <= 0)
-           {
-               System.out.println("Вы проиграли!");
-           }
+                System.out.println("Вы проиграли!");
+                Stage endStage = new Stage();
+                endStage.initModality(Modality.APPLICATION_MODAL);
+
+                Label label = new Label("Игра окончена!");
+                StackPane.setAlignment(label, Pos.TOP_CENTER);
+                Label status = new Label("Ваш счёт = " + player.score);
+                StackPane.setAlignment(status, Pos.BOTTOM_CENTER);
+                Button endButton = new Button("Выйти");
+
+                endButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        endStage.close();
+                        View.primaryStage.close();
+                    }
+                });
+
+                StackPane newPane = new StackPane(label, status, endButton);
+
+                Scene scene = new Scene(newPane);
+                endStage.setScene(scene);
+                endStage.setHeight(250);
+                endStage.setWidth(250);
+                View.timer.stop();
+                endStage.setAlwaysOnTop(true);
+                endStage.setResizable(false);
+                endStage.show();
         }
     }
 
-    void enemyGo()
+    public void enemyGo()
     {
         if (!this.getBoundsInParent().intersects(player.getBoundsInParent())) {
             int flag = (int)Math.floor((Math.random() * 4));

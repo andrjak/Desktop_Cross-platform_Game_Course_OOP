@@ -64,4 +64,11 @@ public class MapController {    // Отвечает за события кото
             root.getChildren().addAll(goldItem);
         }
     }
+
+    public static void Restart()
+    {
+        gold = new ArrayList<>();
+        enemies = new ArrayList<>();
+    }
+
 }

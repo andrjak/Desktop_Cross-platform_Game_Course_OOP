@@ -67,6 +67,14 @@ public class View {
         primaryStage.show();
     }
 
+    public static void Restart()
+    {
+        view = null;
+        Player.del();
+        Init(View.primaryStage);
+        MapController.Restart();
+    }
+
     public static View Init(Stage primaryStage)
     {
         if (view == null)

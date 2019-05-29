@@ -45,6 +45,11 @@ public class Player extends AbstractEssence
         else return null;
     }
 
+    public static void del()
+    {
+        player = null;
+    }
+
     void getDamage(int damage) // Полученный урон
     {
         this.setHealth(this.getHealth() - damage);

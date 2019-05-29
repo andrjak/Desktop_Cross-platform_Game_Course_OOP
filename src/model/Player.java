@@ -5,6 +5,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import view.View;
 
 public class Player extends AbstractEssence
 {
@@ -14,6 +15,7 @@ public class Player extends AbstractEssence
     private int live = 1;
     private Pane root;
     private static Player player;
+    int bulletT = 0;
 
     private Player(ImageView image, Pane root) // Сокрытый конструктор (вызывается через инициализатор)
     {
@@ -61,6 +63,7 @@ public class Player extends AbstractEssence
             if (this.getBoundsInParent().intersects(gold.getBoundsInParent())) {
                 removeGold = gold;
                 score++;
+                View.coin.setText("Золото: " + score);
                 System.out.println(score);  // Временный консольный вывод
                 MapController.gold.remove(removeGold);
                 root.getChildren().remove(removeGold);
@@ -68,6 +71,21 @@ public class Player extends AbstractEssence
             }
         }
     }
+
+    private void isElixirEat()
+    {
+        for (AbstractElixir elixir: MapController.elixirs)
+        {
+            if (this.getBoundsInParent().intersects(elixir.getBoundsInParent()))
+            {
+                elixir.getElixirEffect();
+                MapController.elixirs.remove(elixir);
+                root.getChildren().remove(elixir);
+                return;
+            }
+        }
+    }
+
 
     private boolean isPlayerStop() // Останавливатся когда врезался в врага
     {
@@ -84,26 +102,32 @@ public class Player extends AbstractEssence
 
     @Override
     public void moveX(int x){                                            // Движение по оси X
-        if (isPlayerStop())
-        {
-            super.moveX(x);
-            isGoldEat();
-        }
-        else super.moveX(-x);
+        if (player.getTranslateX() <= 0 && x < 0)
+            return;
+        if (player.getTranslateX() + player.getWidth() >= View.primaryStage.getScene().getWidth() && x > 0)
+            return;
+        super.moveX(x);
+        isGoldEat();
+        isElixirEat();
     }
     @Override
     public void moveY(int y) {                                           // Движение по оси Y
-        if (isPlayerStop())
-        {
-            super.moveY(y);
-            isGoldEat();
-        }
-        else super.moveY(-y);
+        if (player.getTranslateY() <= 0 && y < 0)
+            return;
+        if (player.getTranslateY() + player.getHeight() >= View.primaryStage.getScene().getHeight() && y > 0)
+            return;
+        super.moveY(y);
+        isGoldEat();
+        isElixirEat();
     }
 
     public void attack(double x, double y)
     {
-        Bullet bullet = new Bullet(this.root, x, y);
+        Bullet bullet;
+        if (bulletT == 0)
+            bullet = new Bullet(this.root, x, y);
+        else if (bulletT == 1)
+            bullet = new BumBullet(this.root, x, y);
     }
 
     void setExperience(int experience)

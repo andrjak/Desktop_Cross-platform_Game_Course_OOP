@@ -4,10 +4,10 @@ import javafx.scene.image.ImageView;
 
 public abstract class AbstractElixir extends AbstractItem {
 
-    public AbstractElixir(ImageView image)
+    AbstractElixir(ImageView image)
     {
         super(image);
     }
 
-    public void getElixirEffect(){}
+    void getElixirEffect(){}
 }

@@ -7,11 +7,15 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import controller.Controller;
 import controller.MapController;
+import javafx.scene.control.Label;
 import model.Enemy;
 import model.Player;
+
+import java.awt.*;
 
 public class View {
 
@@ -22,12 +26,17 @@ public class View {
     private MapController map;
     private Controller controller;
     private Player player;
-    private Camera camera;
     public static AnimationTimer timer;
+    public static Label coin;
 
 
     private View(Stage primaryStage)
     {
+        coin = new Label("Золото: " + "0");
+        coin.setLayoutX(5);
+        coin.setLayoutY(5);
+        coin.setStyle("-fx-font-weight: bold");
+        coin.setFont(new Font("Arial", 16));
         root = new Pane();  // Основной экран
         Player player = Player.Init(new ImageView(new Image(View.class.getResourceAsStream("1.png"))),root);
         MapController map = new MapController(root);
@@ -36,12 +45,10 @@ public class View {
 
         root.setPrefSize(500, 500);
         root.getChildren().addAll(new ImageView(new Image(getClass().getResourceAsStream("back.png")))); // временный фон
+        root.getChildren().addAll(coin);
         root.getChildren().addAll(player); // Так как Player наследуется от Pane
         Scene scene = new Scene(root);
-        //
-        camera = new ParallelCamera();
-        scene.setCamera(camera);
-        //
+
         scene.setOnKeyPressed(event->controller.keys.put(event.getCode(), true));
         scene.setOnKeyReleased(event->controller.keys.put(event.getCode(), false));
 
@@ -56,6 +63,7 @@ public class View {
                 }
                 map.GoldGenerator((int)primaryStage.getWidth(),(int)primaryStage.getHeight());
                 map.EnemyGenerator((int)primaryStage.getWidth(),(int)primaryStage.getHeight());
+                map.ElixirGenerator((int)primaryStage.getWidth(),(int)primaryStage.getHeight());
                 //map.BulletFlight();
             }
         };

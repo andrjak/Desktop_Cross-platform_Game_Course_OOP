@@ -14,10 +14,10 @@ public class Bullet extends Circle {
 
     private int damageSize = 50;
     private Player player;
-    private double X; // Кординаты места назначения
-    private double Y;
+    double X; // Кординаты места назначения
+    double Y;
     private Pane root;
-    private Timeline timeline;
+    Timeline timeline;
     AnimationTimer timer;
 
     Bullet(Pane root, double X, double Y)
@@ -33,7 +33,7 @@ public class Bullet extends Circle {
         flight();
     }
 
-    private void flight() // Нормальный проверенный код полёта пули не трогать
+    void flight() // Нормальный проверенный код полёта пули не трогать
     {
         int duration = (int)(Math.sqrt(Math.pow((this.getCenterX() - this.X),2) +
                 Math.pow((this.getCenterY() - this.Y),2))); // Время рассчитывается в зависимости от расстояния
@@ -55,13 +55,13 @@ public class Bullet extends Circle {
         timer.start();
     }
 
-    private void endFlight()  // Завершение анимации полёта пули
+    void endFlight()  // Завершение анимации полёта пули
     {
         root.getChildren().remove(this);
     }
 
 
-    public void damage()  // Проверка попадания в цель и соответствующее поведение объекта
+    void damage()  // Проверка попадания в цель и соответствующее поведение объекта
     {
         Enemy removeEnemy = null;
         for (Enemy enemy : MapController.enemies) {

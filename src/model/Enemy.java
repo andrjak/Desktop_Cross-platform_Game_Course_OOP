@@ -5,6 +5,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
@@ -12,8 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -80,11 +84,27 @@ public class Enemy extends AbstractEssence {
                 endStage.initModality(Modality.APPLICATION_MODAL);
 
                 Label label = new Label("Игра окончена!");
-                StackPane.setAlignment(label, Pos.TOP_CENTER);
-                Label status = new Label("Ваш счёт = " + player.score);
-                StackPane.setAlignment(status, Pos.BOTTOM_CENTER);
-                Button endButton = new Button("Выйти");
+                label.setFont(new Font("Arial" , 20));
+                label.setLayoutX(22.0);
+                label.setLayoutY(22.0);
+                label.setPrefHeight(17.0);
+                label.setPrefWidth(207.0);
+                label.setTextAlignment(TextAlignment.CENTER);
 
+                Label status = new Label("Ваш счёт = " + player.score);
+                status.setStyle("-fx-font-weight: bold");
+                status.setFont(new Font("Arial", 16));
+                status.setLayoutX(40.0);
+                status.setLayoutY(74.0);
+                status.setPrefHeight(17.0);
+                status.setPrefWidth(207.0);
+                status.setTextAlignment(TextAlignment.CENTER);
+
+                Button endButton = new Button("Выйти");
+                endButton.setLayoutX(22.0);
+                endButton.setLayoutY(170.0);
+                endButton.setPrefHeight(25.0);
+                endButton.setPrefWidth(207.0);
                 endButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -93,12 +113,29 @@ public class Enemy extends AbstractEssence {
                     }
                 });
 
-                StackPane newPane = new StackPane(label, status, endButton);
+                Button restartButton = new Button("Заново");
+                restartButton.setLayoutX(22.0);
+                restartButton.setLayoutY(120.0);
+                restartButton.setPrefHeight(25.0);
+                restartButton.setPrefWidth(207.0);
+                restartButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
 
-                Scene scene = new Scene(newPane);
-                endStage.setScene(scene);
+                    }
+                });
+
+                Pane newPane = new Pane(label, endButton, restartButton, status);
+                newPane.setPrefHeight(250);
+                newPane.setPrefWidth(250);
+                 //FlowPane newPane = new FlowPane(Orientation.VERTICAL, 10, 10, label, endButton, status);
+                 //newPane.setAlignment(Pos.TOP_CENTER);
+                 //StackPane newPane = new StackPane(label, status, endButton);
+
+                Scene scene = new Scene(newPane, 250, 250);
                 endStage.setHeight(250);
                 endStage.setWidth(250);
+                endStage.setScene(scene);
                 View.timer.stop();
                 endStage.setAlwaysOnTop(true);
                 endStage.setResizable(false);

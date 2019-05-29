@@ -35,7 +35,7 @@ public class View {
         View.primaryStage = primaryStage;
 
         root.setPrefSize(500, 500);
-        //root.getChildren().addAll(new ImageView(new Image(getClass().getResourceAsStream("backGround.png")))); // временный фон
+        root.getChildren().addAll(new ImageView(new Image(getClass().getResourceAsStream("back.png")))); // временный фон
         root.getChildren().addAll(player); // Так как Player наследуется от Pane
         Scene scene = new Scene(root);
         //

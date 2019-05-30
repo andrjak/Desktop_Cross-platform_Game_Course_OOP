@@ -2,6 +2,7 @@ package model;
 
 import controller.MapController;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -16,6 +17,9 @@ public class Player extends AbstractEssence
     private Pane root;
     private static Player player;
     int bulletT = 0;
+    int speed = 1;
+    public boolean bumBum = false;
+    public Label bum;
 
     private Player(ImageView image, Pane root) // Сокрытый конструктор (вызывается через инициализатор)
     {
@@ -86,7 +90,6 @@ public class Player extends AbstractEssence
         }
     }
 
-
     private boolean isPlayerStop() // Останавливатся когда врезался в врага
     {
         for (Enemy enemy: MapController.enemies)
@@ -99,9 +102,9 @@ public class Player extends AbstractEssence
         return true;
     }
 
-
     @Override
     public void moveX(int x){                                            // Движение по оси X
+        x *= speed;
         if (player.getTranslateX() <= 0 && x < 0)
             return;
         if (player.getTranslateX() + player.getWidth() >= View.primaryStage.getScene().getWidth() && x > 0)
@@ -110,8 +113,10 @@ public class Player extends AbstractEssence
         isGoldEat();
         isElixirEat();
     }
+
     @Override
     public void moveY(int y) {                                           // Движение по оси Y
+        y *= speed;
         if (player.getTranslateY() <= 0 && y < 0)
             return;
         if (player.getTranslateY() + player.getHeight() >= View.primaryStage.getScene().getHeight() && y > 0)
@@ -123,11 +128,10 @@ public class Player extends AbstractEssence
 
     public void attack(double x, double y)
     {
-        Bullet bullet;
         if (bulletT == 0)
-            bullet = new Bullet(this.root, x, y);
+            new Bullet(this.root, x, y);
         else if (bulletT == 1)
-            bullet = new BumBullet(this.root, x, y);
+            new BumBullet(this.root, x, y);
     }
 
     void setExperience(int experience)

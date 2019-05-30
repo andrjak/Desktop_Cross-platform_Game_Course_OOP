@@ -86,7 +86,7 @@ public class MapController {    // Отвечает за события кото
 
     public void ElixirGenerator(int lenX, int lenY)
     {
-        int random = (int)Math.floor(Math.random() * 500);
+        int random = (int)Math.floor(Math.random() * 1500);
         int x = (int)Math.floor(Math.random() * lenX);
         int y = (int)Math.floor(Math.random() * lenY);
         if (Math.abs(x - player.getCentralX()) < 75 || Math.abs(y - player.getCentralY()) < 75)
@@ -94,8 +94,24 @@ public class MapController {    // Отвечает за события кото
             EnemyGenerator(lenX, lenY);
             return;
         }
-        if(random == 5){
+        if (random == 5){
             BumBulletElixir elixirItem = new BumBulletElixir(new ImageView(new Image(getClass().getResourceAsStream("BumBulletElixirImage.png"))));
+            elixirItem.setTranslateX(x);
+            elixirItem.setTranslateY(y);
+            elixirs.add(elixirItem);
+            root.getChildren().addAll(elixirItem);
+        }
+        if (random == 10)
+        {
+            SpeedElixir elixirItem = new SpeedElixir(new ImageView(new Image(getClass().getResourceAsStream("SpeedBulletElixirImage.png"))));
+            elixirItem.setTranslateX(x);
+            elixirItem.setTranslateY(y);
+            elixirs.add(elixirItem);
+            root.getChildren().addAll(elixirItem);
+        }
+        if (random == 15)
+        {
+            BumBumElixir elixirItem = new BumBumElixir(new ImageView(new Image(getClass().getResourceAsStream("BumBumElixirImage.png"))));
             elixirItem.setTranslateX(x);
             elixirItem.setTranslateY(y);
             elixirs.add(elixirItem);
@@ -105,9 +121,9 @@ public class MapController {    // Отвечает за события кото
 
     public static void Restart()
     {
-        gold = new ArrayList<>();
-        enemies = new ArrayList<>();
-        elixirs = new ArrayList<>();
+        gold.clear();
+        enemies.clear();
+        elixirs.clear();
     }
 
     class Task extends TimerTask {

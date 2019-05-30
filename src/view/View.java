@@ -22,7 +22,7 @@ public class View {
     private static View view;
     //Игровые переменные для настройки всего приложения
     public static Stage primaryStage;
-    private Pane root;
+    public static Pane root;
     private MapController map;
     private Controller controller;
     private Player player;
@@ -36,6 +36,7 @@ public class View {
         coin.setLayoutX(5);
         coin.setLayoutY(5);
         coin.setStyle("-fx-font-weight: bold");
+        //coin.setTextFill(Color.RED);
         coin.setFont(new Font("Arial", 16));
         root = new Pane();  // Основной экран
         Player player = Player.Init(new ImageView(new Image(View.class.getResourceAsStream("1.png"))),root);
@@ -56,8 +57,6 @@ public class View {
             @Override
             public void handle(long now) {            // Вызывается в каждом кадре анимации
                 controller.update();
-                //camera.setTranslateX(player.getCentralX() - primaryStage.getWidth() / 2);
-                //camera.setTranslateY(player.getCentralY() - primaryStage.getHeight() / 2);
                 for (Enemy enemy: MapController.enemies) {
                     enemy.enemyGo();
                 }

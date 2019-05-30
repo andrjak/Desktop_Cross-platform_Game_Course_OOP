@@ -1,8 +1,18 @@
 package controller;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
+import model.BumBum;
+import model.Enemy;
 import model.Player;
+import view.Paus;
 
 import java.util.HashMap;
 
@@ -42,13 +52,26 @@ public class Controller {
             player.animation.setOffsetY(108);
             player.moveX(-2);
         }
-        else if (isPressed(KeyCode.TAB))
-        {
-            System.out.println("Скоро чит режим!");
-            keys.clear();
-        }
         else {                                               // Если кнопки не нажаты останавливаем анимацию
             player.animation.stop();
+        }
+
+        if (isPressed(KeyCode.TAB))
+        {
+            assert Player.Init() != null;
+            if (Player.Init().bumBum)
+            {
+                root.getChildren().remove(player.bum);
+                Player.Init().bumBum = false;
+                BumBum bum = new BumBum(root);
+                bum.flight();
+            }
+            keys.clear();
+        }
+        if (isPressed(KeyCode.ESCAPE))
+        {
+            new Paus();
+            keys.clear();
         }
     }
 }

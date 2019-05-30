@@ -32,22 +32,22 @@ public class Controller {
     }
 
     public void update() {                                    //Вызов анимации и движения player
-        if (isPressed(KeyCode.UP)) {
+        if (isPressed(KeyCode.UP) || isPressed(KeyCode.W)) {
             player.animation.play();
             player.animation.setOffsetY(72);
             player.moveY(-2);
         }
-        else if (isPressed(KeyCode.DOWN)) {
+        else if (isPressed(KeyCode.DOWN) || isPressed(KeyCode.S)) {
             player.animation.play();
             player.animation.setOffsetY(0);
             player.moveY(2);
         }
-        else if (isPressed(KeyCode.RIGHT)) {
+        else if (isPressed(KeyCode.RIGHT)  || isPressed(KeyCode.D)) {
             player.animation.play();
             player.animation.setOffsetY(36);
             player.moveX(2);
         }
-        else if (isPressed(KeyCode.LEFT)) {
+        else if (isPressed(KeyCode.LEFT) || isPressed(KeyCode.A)) {
             player.animation.play();
             player.animation.setOffsetY(108);
             player.moveX(-2);

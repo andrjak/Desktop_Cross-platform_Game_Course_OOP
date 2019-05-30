@@ -6,13 +6,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import view.EndPage;
 import view.View;
 
 public class Player extends AbstractEssence
 {
     private int experience = 0;  // Опыт игрока при достижении отметки повышает уровень
     private int experienceMax = 100; // Количество опыта который нобходимо получить для повышения уровня (на каждом уровне увеличивается в 2 раза)
-    int score = 0;  // Количество золота
+    public int score = 0;  // Количество золота
     private int live = 1;
     private Pane root;
     private static Player player;
@@ -90,16 +91,15 @@ public class Player extends AbstractEssence
         }
     }
 
-    private boolean isPlayerStop() // Останавливатся когда врезался в врага
+    private void isPlayerStop() // Останавливатся когда врезался в врага
     {
         for (Enemy enemy: MapController.enemies)
         {
             if (this.getBoundsInParent().intersects(enemy.getBoundsInParent()))
             {
-                return false;
+                new EndPage();
             }
         }
-        return true;
     }
 
     @Override
@@ -112,6 +112,7 @@ public class Player extends AbstractEssence
         super.moveX(x);
         isGoldEat();
         isElixirEat();
+        isPlayerStop();
     }
 
     @Override
@@ -124,6 +125,7 @@ public class Player extends AbstractEssence
         super.moveY(y);
         isGoldEat();
         isElixirEat();
+        isPlayerStop();
     }
 
     public void attack(double x, double y)
